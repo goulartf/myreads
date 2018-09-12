@@ -5,33 +5,57 @@ import logo from './logo.png';
 //API
 import * as BooksAPI from './Api/BooksAPI'
 
-const shelfCurrentlyReading = "currentlyReading";
-const shelfRead = "read";
-const shelfWantToRead = "wantToRead";
-const shelfTitle = {
-    shelfCurrentlyReading: 'Currently Reading',
-    shelfRead: 'Read',
-    shelfWantToRead: 'Want To Read'
-}
+//COMPONENTS
+import Shelf from "./Shelf";
+
+//CONSTANTS
+const SHELF_CURRENTLY_READING = "currentlyReading";
+const SHELF_READ = "read";
+const SHELF_WANT_TO_READ = "wantToRead";
+
+const SHELF_TITLE = {
+    SHELF_CURRENTLY_READING: 'Currently Reading',
+    SHELF_READ: 'Read',
+    SHELF_WANT_TO_READ: 'Want To Read'
+};
 
 class App extends Component {
 
     state = {
-        books: [],
+        books: [{},{},{}],
         loading: true
     };
 
     componentDidMount() {
 
-        // this.setState({loading: true})
-
-        BooksAPI.getAll().then((books) => {
-            this.setState({books});
-            // setTimeout(() => {this.setState({loading: false})}, 5000);
-            this.setState({loading: false})
-        })
+        this.getAllBooks();
 
     }
+
+    getAllBooks = () => {
+
+
+        this.setState({loading: true})
+        BooksAPI.getAll().then((books) => {
+
+            setTimeout(() => {
+                this.setState({loading: false})
+                this.setState({books});
+            }, 1000);
+
+        })
+
+    };
+
+    changeShelfBook = (book, shelf) => {
+
+        BooksAPI.update(book, shelf).then(() => {
+
+            this.getAllBooks();
+
+        });
+
+    };
 
     render() {
 
@@ -42,23 +66,23 @@ class App extends Component {
                 <div className="app-container">
                     <div className="side-menu">
                         <div className="profile-section">
-                            <a className="logo-wrapper" href="/discover">
+                            <a className="logo-wrapper" href="/">
                                 <img src={logo} className="logo" alt="My Reads"/>
                                 <h2>MY READS</h2>
                             </a>
                         </div>
                         <ul className="menu-list">
-                            <a className="menu-item active" href="/discover">
-                                <i className="address book icon"/>
-                                Reading
+                            <a className="menu-item active" href="/">
+                                <i className="eye icon"/>
+                                {SHELF_TITLE.SHELF_CURRENTLY_READING}
                             </a>
-                            <a className="menu-item" href="/reviews">
+                            <a className="menu-item" href="/">
                                 <i className="heart icon"/>
-                                Wishes
+                                {SHELF_TITLE.SHELF_WANT_TO_READ}
                             </a>
-                            <a className="menu-item" href="/activity">
+                            <a className="menu-item" href="/">
                                 <i className="archive icon"/>
-                                Read
+                                {SHELF_TITLE.SHELF_READ}
                             </a>
                         </ul>
                     </div>
@@ -85,61 +109,8 @@ class App extends Component {
                                 </div>
                             </div>
                             <div className="books-container">
-
-                                {books.filter((book) => book.shelf === shelfRead).map((book) => (
-
-                                    <div className="book-wrapper">
-                                        <div className="book-card">
-                                            <div className="poster-wrapper">
-                                                <img className="poster"
-                                                     src={book.imageLinks.smallThumbnail}
-                                                     alt={book.title}
-                                                     style={{opacity: 1}}/>
-                                                <div className="colored-shadow"
-                                                     style={{backgroundImage: 'url(https://image.tmdb.org/t/p/w500/ooBGRQBdbGzBxAVfExiO8r7kloA.jpg)'}}/>
-                                                <h5 className="score">{book.averageRating ? book.averageRating : 0}</h5>
-                                            </div>
-                                            <div className="info-wrapper">
-                                                <div className="title"><h4>{book.title}</h4></div>
-                                                <div className="genres">
-                                                    <div className="ui tiny label">
-                                                        <i className="user icon" />
-                                                        {book.authors.map(author => author)}
-                                                    </div>
-                                                    <div className="ui tiny label">{book.publishedDate}</div>
-                                                    <div className="ui tiny label">{book.language}</div>
-                                                    {book.categories.map(category => (
-                                                        <div className="ui tiny label">{category}</div>
-                                                    ))}
-                                                </div>
-                                            </div>
-                                            <br/>
-                                            <br/>
-                                            <br/>
-                                            <div className="actions-bar">
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                ))}
-
-                                <div className="book-wrapper loading blink">
-                                    <div className="book-card">
-                                        <div className="poster-wrapper">
-                                            <img className="poster"
-                                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPoAAAF3AQMAAAC2e8TMAAAABlBMVEXMzMyWlpYU2uzLAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAIklEQVRoge3BAQEAAACCIP+vbkhAAQAAAAAAAAAAAAAApwYwVwABN271wQAAAABJRU5ErkJggg=="
-                                                 alt="placeholder"/>
-                                        </div>
-                                        <div className="info-wrapper">
-                                            <div className="loading-block"/>
-                                            <div className="loading-block small"/>
-                                        </div>
-                                        <div className="actions-bar">
-
-                                        </div>
-                                    </div>
-                                </div>
-
+                                <Shelf onChangeShelfBook={this.changeShelfBook} books={books} loading={loading}
+                                       shelfTitle={SHELF_TITLE} shelf={SHELF_WANT_TO_READ}/>
                             </div>
                         </div>
                     </div>
@@ -147,6 +118,7 @@ class App extends Component {
             </div>
         );
     }
+
 }
 
 export default App;
