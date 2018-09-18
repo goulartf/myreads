@@ -485,12 +485,12 @@ input:-webkit-autofill {
     margin: 0px;
     font-size: 18px;
     font-weight: 700;
-    height: 54px;
+    height: 68px;
 }
 
 .books-container .book-wrapper .book-card .info-wrapper .genres {
     margin-top: 6px;
-    height: 54px;
+    height: 68px;
 }
 
 .books-container .book-wrapper .book-card .info-wrapper .genres .ui.label {
