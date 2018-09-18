@@ -1,4 +1,4 @@
-![MyReads](https://raw.githubusercontent.com/goulartf/myreads/master/myReads.jpg)
+![MyReads](https://raw.githubusercontent.com/goulartf/myreads/master/myReads.png)
 
 # MyReads Project
 
