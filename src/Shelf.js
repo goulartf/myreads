@@ -13,28 +13,25 @@ class Shelf extends Component {
         const filterBooks = books.filter((book) => book.shelf === shelf);
 
         return (
-            <React.Fragment>
+            <div className="books-container">
+                {loading && (
+                    <BookCardPlaceholder size={3}/>
+                )}
 
-                <div className="books-container">
-                    {loading && (
-                        <BookCardPlaceholder size={3} />
-                    )}
+                {!loading && (filterBooks.map((book) => (
 
-                    {!loading && (filterBooks.map((book) => (
+                    <BookCard book={book} shelfbooks={[]} onChangeShelfBook={onChangeShelfBook} key={book.id}/>
 
-                        <BookCard book={book} shelfActive={shelf} onChangeShelfBook={onChangeShelfBook} key={book.id}/>
+                )))}
 
-                    )))}
+                {!loading && (filterBooks.length === 0 && (
 
-                    {!loading && (filterBooks.length === 0 && (
+                    <div className="ui floating message">
+                        <p>No Books Selected! Let`s try new one ou <Link to="/search">Search</Link></p>
+                    </div>
 
-                        <div className="ui floating message">
-                            <p>No Books Selected! Let`s try new one ou <Link  to="/search" >Search</Link></p>
-                        </div>
-
-                    ))}
-                </div>
-            </React.Fragment>
+                ))}
+            </div>
         );
     }
 }
