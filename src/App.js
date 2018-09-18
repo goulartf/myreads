@@ -1,12 +1,18 @@
 import React, {Component} from 'react';
+import {Route, NavLink} from 'react-router-dom'
 import './App.css';
 import logo from './logo.png';
+
+//TOASTFY
+import {ToastContainer, toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css';
 
 //API
 import * as BooksAPI from './Api/BooksAPI'
 
 //COMPONENTS
 import Shelf from "./Shelf";
+import Search from "./Search";
 
 //CONSTANTS
 const SHELF_CURRENTLY_READING = "currentlyReading";
@@ -21,8 +27,13 @@ const SHELF_TITLE = {
 
 class App extends Component {
 
+
+    notify = (msg) => toast.success(msg, {
+        position: 'top-center'
+    });
+
     state = {
-        books: [{},{},{}],
+        books: [{}, {}, {}],
         loading: true
     };
 
@@ -38,20 +49,30 @@ class App extends Component {
         this.setState({loading: true})
         BooksAPI.getAll().then((books) => {
 
-            setTimeout(() => {
-                this.setState({loading: false})
-                this.setState({books});
-            }, 1000);
+            this.setState({loading: false})
+            this.setState({books});
 
         })
 
     };
 
-    changeShelfBook = (book, shelf) => {
+    changeShelfBook = (_book, shelf) => {
 
-        BooksAPI.update(book, shelf).then(() => {
+        if (_book.shelf === shelf)
+            return false;
 
-            this.getAllBooks();
+
+        BooksAPI.update(_book, shelf).then(() => {
+
+            this.notify('Book update with success');
+            const books = this.state.books.map(book => {
+                if (_book.id === book.id) {
+                    book.shelf = shelf;
+                }
+                return book;
+            });
+
+            this.setState({"books": books});
 
         });
 
@@ -63,7 +84,11 @@ class App extends Component {
 
         return (
             <div>
+
+                <ToastContainer/>
+
                 <div className="app-container">
+
                     <div className="side-menu">
                         <div className="profile-section">
                             <a className="logo-wrapper" href="/">
@@ -72,46 +97,42 @@ class App extends Component {
                             </a>
                         </div>
                         <ul className="menu-list">
-                            <a className="menu-item active" href="/">
+                            <NavLink exact={true} to="/" activeClassName={"active"} className={"menu-item"}>
                                 <i className="eye icon"/>
                                 {SHELF_TITLE.SHELF_CURRENTLY_READING}
-                            </a>
-                            <a className="menu-item" href="/">
+                            </NavLink>
+                            <NavLink to="/want-to-read" className="menu-item">
                                 <i className="heart icon"/>
                                 {SHELF_TITLE.SHELF_WANT_TO_READ}
-                            </a>
-                            <a className="menu-item" href="/">
+                            </NavLink>
+                            <NavLink to="/read" className="menu-item">
                                 <i className="archive icon"/>
                                 {SHELF_TITLE.SHELF_READ}
-                            </a>
+                            </NavLink>
+                            <NavLink to="/search" className="menu-item">
+                                <i className="search icon"/>
+                                Search
+                            </NavLink>
                         </ul>
                     </div>
+
                     <div className="feed-container">
                         <div>
-                            <div className="filter-row">
-                                <div className="ui search">
-                                    <div className="ui icon input">
-                                        <input placeholder="Search" type="text" tabIndex="0" className="prompt"
-                                               autoComplete="off"/>
-                                        <i aria-hidden="true" className="search icon"/>
-                                    </div>
-                                </div>
-                                <div role="listbox" aria-expanded="false"
-                                     className="ui inline top right pointing dropdown produ-dropdown" tabIndex="0">
-                                    <div className="text" role="alert" aria-live="polite">All</div>
-                                    <i aria-hidden="true" className="dropdown icon"/>
-                                    <div className="menu transition">
-                                        <div role="option" aria-checked="true" aria-selected="true"
-                                             className="active selected item">
-                                            <span className="text">All</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="books-container">
+                            <Route exact path='/' render={() => (
                                 <Shelf onChangeShelfBook={this.changeShelfBook} books={books} loading={loading}
-                                       shelfTitle={SHELF_TITLE} shelf={SHELF_WANT_TO_READ}/>
-                            </div>
+                                       shelf={SHELF_CURRENTLY_READING}/>
+                            )}/>
+                            <Route exact path='/want-to-read' render={() => (
+                                <Shelf onChangeShelfBook={this.changeShelfBook} books={books} loading={loading}
+                                       shelf={SHELF_WANT_TO_READ}/>
+                            )}/>
+                            <Route exact path='/read' render={() => (
+                                <Shelf onChangeShelfBook={this.changeShelfBook} books={books} loading={loading}
+                                       shelf={SHELF_READ}/>
+                            )}/>
+                            <Route exact path='/search' render={() => (
+                                <Search shelfBooks={books} onChangeShelfBook={this.changeShelfBook}/>
+                            )}/>
                         </div>
                     </div>
                 </div>
