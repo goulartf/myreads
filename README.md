@@ -5,7 +5,7 @@
 This is my first project from Udacity Brasil. 
 The goal was to create a bookshelf using Create React App applying the knowledge learned during the lessons. 
 
-[LIVE DEMO](https://goulartf.github.io/myreads/)
+[LIVE DEMO](https://myreads-app-udacity.herokuapp.com/)
 
 ## TL;DR
 
