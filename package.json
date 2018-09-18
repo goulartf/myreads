@@ -2,7 +2,7 @@
   "name": "app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://goulartf.github.io/myreads",
+  "homepage": "https://goulartf.github.io",
   "dependencies": {
     "escape-string-regexp": "^1.0.5",
     "react": "^16.5.0",
