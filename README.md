@@ -79,4 +79,6 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 * [Udacity's CSS Style Guide](http://udacity.github.io/frontend-nanodegree-styleguide/css.html)
 * [Udacity's JavaScript Style Guide](http://udacity.github.io/frontend-nanodegree-styleguide/javascript.html)
 * [Udacity's Git Style Guide](https://udacity.github.io/git-styleguide/)
-* [RaterFox](https://www.raterfox.com/)
+* [RaterFox](https://www.raterfox.com)
+* [Semantic UI](https://semantic-ui.com)
+* [React Semantic UI](https://react.semantic-ui.com/)
