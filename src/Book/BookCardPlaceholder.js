@@ -5,7 +5,7 @@ class BookCardPlaceholder extends Component {
     render() {
 
         const {size} = this.props;
-        let placeholders = [{}, {}, {}];
+        let placeholders = [];
         for (let i = 1; i <= size; i++) {
             placeholders.push({key: i});
         }

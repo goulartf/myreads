@@ -1,15 +1,12 @@
 import React, {Component} from 'react';
-import {Route, NavLink} from 'react-router-dom'
+import {NavLink, Route} from 'react-router-dom'
 import './App.css';
 import logo from './logo.png';
-
 //TOASTFY
-import {ToastContainer, toast} from 'react-toastify';
+import {toast, ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
-
 //API
 import * as BooksAPI from './Api/BooksAPI'
-
 //COMPONENTS
 import Shelf from "./Shelf";
 import Search from "./Search";
@@ -65,12 +62,22 @@ class App extends Component {
         BooksAPI.update(_book, shelf).then(() => {
 
             this.notify('Book update with success');
-            const books = this.state.books.map(book => {
+            let books = this.state.books;
+
+            //If not exists add
+            const existBook = books.filter(book => _book.id === book.id);
+            if (existBook.length === 0) {
+                books.push(_book);
+            }
+
+            //Insert new Shelf
+            books.map(book => {
                 if (_book.id === book.id) {
                     book.shelf = shelf;
                 }
                 return book;
             });
+
 
             this.setState({"books": books});
 
@@ -131,7 +138,7 @@ class App extends Component {
                                        shelf={SHELF_READ}/>
                             )}/>
                             <Route exact path='/search' render={() => (
-                                <Search shelfBooks={books} onChangeShelfBook={this.changeShelfBook}/>
+                                <Search shelfbooks={books} onChangeShelfBook={this.changeShelfBook}/>
                             )}/>
                         </div>
                     </div>

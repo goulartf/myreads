@@ -9,7 +9,9 @@ class Shelf extends Component {
     render() {
 
         const {books, loading, shelf, onChangeShelfBook} = this.props;
+
         const filterBooks = books.filter((book) => book.shelf === shelf);
+
         return (
             <React.Fragment>
 
@@ -20,14 +22,14 @@ class Shelf extends Component {
 
                     {!loading && (filterBooks.map((book) => (
 
-                        <BookCard book={book} shelfActive={shelf} onChangeShelfBook={onChangeShelfBook}/>
+                        <BookCard book={book} shelfActive={shelf} onChangeShelfBook={onChangeShelfBook} key={book.id}/>
 
                     )))}
 
                     {!loading && (filterBooks.length === 0 && (
 
                         <div className="ui floating message">
-                            <p>No Books Selected! Let`s try new one ou <Link to={"/"}>Search</Link></p>
+                            <p>No Books Selected! Let`s try new one ou <Link  to="/search" >Search</Link></p>
                         </div>
 
                     ))}

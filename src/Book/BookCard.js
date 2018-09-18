@@ -19,17 +19,20 @@ const SHELF_TITLE = {
 class BookCard extends Component {
 
     props = {
-        shelfBooks: []
+        shelfbooks: [],
+        book: {},
+        onChangeShelfBook: () => {},
+        shelfActive: ""
     };
 
     render() {
 
         let book = this.props.book;
 
-        const {onChangeShelfBook, shelfBooks} = this.props;
+        const {onChangeShelfBook, shelfbooks} = this.props;
 
-        if(shelfBooks) {
-            const shelfBook = shelfBooks.filter(shelfBook => shelfBook.id === book.id);
+        if(shelfbooks) {
+            const shelfBook = shelfbooks.filter(shelfBook => shelfBook.id === book.id);
             book = shelfBook[0] ? shelfBook[0] : book;
         }
 

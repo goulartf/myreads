@@ -35,7 +35,7 @@ class Search extends Component {
     render() {
 
         const {value, results, books, loading} = this.state;
-        const {shelfBooks,onChangeShelfBook} = this.props;
+        const {shelfbooks,onChangeShelfBook} = this.props;
 
 
         return (
@@ -63,7 +63,7 @@ class Search extends Component {
 
                     {!loading && (books.map((book) => (
 
-                        <BookCard book={book} shelfBooks={shelfBooks} shelfActive={book.shelf} onChangeShelfBook={onChangeShelfBook}/>
+                        <BookCard book={book} shelfbooks={shelfbooks} shelfActive={book.shelf} onChangeShelfBook={onChangeShelfBook}/>
 
                     )))}
 
