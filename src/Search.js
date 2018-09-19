@@ -63,7 +63,7 @@ class Search extends Component {
 
                     {!loading && (books.map((book) => (
 
-                        <BookCard book={book} shelfbooks={shelfbooks} onChangeShelfBook={onChangeShelfBook}/>
+                        <BookCard book={book} shelfbooks={shelfbooks} onChangeShelfBook={onChangeShelfBook} key={book.id}/>
 
                     )))}
 

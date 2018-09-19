@@ -30,11 +30,11 @@ class App extends Component {
     });
 
     state = {
-        books: [{}, {}, {}],
+        books: [],
         loading: true
     };
 
-    componentDidMount() {
+    async componentDidMount() {
 
         this.getAllBooks();
 
@@ -53,35 +53,30 @@ class App extends Component {
 
     };
 
-    changeShelfBook = (_book, shelf) => {
+    changeShelfBook = (book, shelf) => {
 
-        if (_book.shelf === shelf)
+        if (book.shelf === shelf)
             return false;
 
 
-        BooksAPI.update(_book, shelf).then(() => {
+        BooksAPI.update(book, shelf);
 
-            this.notify('Book update with success');
-            let books = this.state.books;
-
-            //If not exists add
-            const existBook = books.filter(book => _book.id === book.id);
-            if (existBook.length === 0) {
-                books.push(_book);
-            }
-
-            //Insert new Shelf
-            books.map(book => {
-                if (_book.id === book.id) {
-                    book.shelf = shelf;
-                }
-                return book;
-            });
+        this.notify('Book update with success');
+        let books = this.state.books;
+        book.shelf = shelf;
 
 
-            this.setState({"books": books});
+        //If not exists add
+        const existBook = books.filter(b => b.id === book.id);
+        if (existBook.length === 0) {
+            books.push(book);
+        }
 
-        });
+        // update book
+        books.filter(b => b.id === book.id).concat([ book ]);
+
+
+        this.setState({"books": books});
 
     };
 
