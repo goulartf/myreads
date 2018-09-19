@@ -34,7 +34,7 @@ class App extends Component {
         loading: true
     };
 
-    async componentDidMount() {
+    componentDidMount() {
 
         this.getAllBooks();
 
