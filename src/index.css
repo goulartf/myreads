@@ -413,7 +413,7 @@ input:-webkit-autofill {
     display: inline-block;
     position: relative;
     z-index: 0;
-    width: calc(17% - 6px);
+    width: calc(21% - 6px);
     margin: -15px 0 0 15px;
     -webkit-transition: all .2s ease-out;
     -o-transition: all .2s ease-out;
@@ -478,19 +478,19 @@ input:-webkit-autofill {
     display: inline-block;
     vertical-align: top;
     padding: 15px;
-    width: calc(73% - 7px);
+    width: calc(68% - 7px);
 }
 
 .books-container .book-wrapper .book-card .info-wrapper .title h4 {
     margin: 0px;
     font-size: 18px;
     font-weight: 700;
-    height: 54px;
+    height: 68px;
 }
 
 .books-container .book-wrapper .book-card .info-wrapper .genres {
     margin-top: 6px;
-    height: 54px;
+    height: 68px;
 }
 
 .books-container .book-wrapper .book-card .info-wrapper .genres .ui.label {
@@ -502,7 +502,7 @@ input:-webkit-autofill {
     display: inline-block;
     vertical-align: top;
     padding: 15px;
-    width: calc(10% - 2px);
+    width: calc(11% - 2px);
 }
 
 .books-container .book-wrapper .book-card .want-to-read-wrapper .icon-want-to-read{

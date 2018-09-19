@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
-
-
 // SEMANTIC UI
-import {Rating} from 'semantic-ui-react'
+import {Popup, Rating} from 'semantic-ui-react'
 
 
 //CONSTANTS
@@ -18,26 +16,27 @@ const SHELF_TITLE = {
 
 class BookCard extends Component {
 
-    props = {
-        shelfBooks: []
+    static defaultProps  = {
+        shelfbooks: [],
+        book: {},
+        onChangeShelfBook: () => {
+        }
     };
 
     render() {
 
         let book = this.props.book;
 
-        const {onChangeShelfBook, shelfBooks} = this.props;
+        const {onChangeShelfBook, shelfbooks} = this.props;
 
-        if(shelfBooks) {
-            const shelfBook = shelfBooks.filter(shelfBook => shelfBook.id === book.id);
+        if (shelfbooks) {
+            const shelfBook = shelfbooks.filter(shelfBook => shelfBook.id === book.id);
             book = shelfBook[0] ? shelfBook[0] : book;
         }
 
         const date = new Date(book.publishedDate);
 
         const imagem = book.imageLinks && book.imageLinks.thumbnail ? book.imageLinks.thumbnail : "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPoAAAF3AQMAAAC2e8TMAAAABlBMVEXMzMyWlpYU2uzLAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAIklEQVRoge3BAQEAAACCIP+vbkhAAQAAAAAAAAAAAAAApwYwVwABN271wQAAAABJRU5ErkJggg==";
-
-
 
         return (
 
@@ -50,7 +49,7 @@ class BookCard extends Component {
                              alt={book.title}
                              style={{opacity: 1}}/>
                         <div className="colored-shadow"
-                             style={{backgroundImage: 'url('+imagem+')'}}/>
+                             style={{backgroundImage: 'url(' + imagem + ')'}}/>
                         <h5 className="rating">
                             <Rating icon='star'
                                     disabled
@@ -82,10 +81,17 @@ class BookCard extends Component {
                         </div>
                     </div>
                     <div className="want-to-read-wrapper">
-                        <a>
-                            <i className={"heart icon icon-want-to-read " + (book.shelf === SHELF_WANT_TO_READ ? "active" : "")}
-                               onClick={() => onChangeShelfBook(book, SHELF_WANT_TO_READ)}/>
-                        </a>
+                        <Popup
+                            key={book.id}
+                            trigger={
+                                <a>
+                                    <i className={"heart icon icon-want-to-read " + (book.shelf === SHELF_WANT_TO_READ ? "active" : "")}
+                                       onClick={() => onChangeShelfBook(book, SHELF_WANT_TO_READ)}/>
+                                </a>
+                            }
+                            content="Want to read"
+                        />
+
                     </div>
                     <br/>
                     <br/>

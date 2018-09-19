@@ -1,40 +1,42 @@
-#My Reads
-[ Live project ]
+![MyReads](https://raw.githubusercontent.com/goulartf/myreads/master/myReads.png)
 
-Project Overview
-This is my fourth project of the Advanced Front-End course, 
-from Udacity Brasil. 
-The goal was to create a bookshelf using Create React App applying 
-the knowledge learned during the lessons. I also took this project 
-to practice localStorage, 
-css and some other React tools. 
-All the images were made using Adobe Illustrator.
+# PROJECT
 
-Specification
-From Udacity:
+Project from my course (React Nanodegree) on Udacity Brasil. 
+The goal was to create a bookshelf using Create React App applying the knowledge learned during the lessons.
 
-In the MyReads project, you'll create a bookshelf app that allows you to select and categorize books you have read, are currently reading, or want to read. The project emphasizes using React to build the application and provides an API server and client library that you will use to persist information as you interact with the application.
-Starting from Scratch:
-If you'd like to start completely from scratch, you can use Create React App to create a new React application. However, even if you create your own application from scratch you'll still need to use the booksAPI.js file that comes with the starter template to interact with the backend API. Instructions for using the API methods are provided in the README in the starter template repository.
-App Functionality:
-In this application, the main page displays a list of "shelves" (i.e. categories), each of which contains a number of books. You can also search and add more books in the /search page. The three shelves are:
-.Currently Reading
-.Want to Read
-.Read
+[LIVE DEMO](https://myreads-app-udacity.herokuapp.com/)
 
-Instructions
-You can clone or download this repository. To run dev environment:
+### Functionality
+In this application, the main page displays a list of "shelves" (i.e. categories), 
+each of which contains a number of books. You can also search and add more books in the /search page. 
+The three shelves are:  
+.Currently Reading  
+.Want to Read  
+.Read  
 
-npm install
-npm start
+## Instructions
 
-Resources
-Udacity - Web Front-End Avançado
-Create React App
-Udacity's HTML Style Guide
-Udacity's CSS Style Guide
-Udacity's JavaScript Style Guide
-Udacity's Git Style Guide
+* install all project dependencies with `npm install`
+* start the development server with `npm start`
+###### OR
+* install all project dependencies with `yarn install`
+* start the development server with `yarn start`
 
-CREDITS
-https://www.raterfox.com/
+## Important
+The backend API works only with terms listed below: 
+[
+'Android', 'Art', 'Artificial Intelligence', 'Astronomy', 'Austen', 'Baseball', 'Basketball', 'Bhagat', 'Biography', 'Brief', 'Business', 'Camus', 'Cervantes', 'Christie', 'Classics', 'Comics', 'Cook', 'Cricket', 'Cycling', 'Desai', 'Design', 'Development', 'Digital Marketing', 'Drama', 'Drawing', 'Dumas', 'Education', 'Everything', 'Fantasy', 'Film', 'Finance', 'First', 'Fitness', 'Football', 'Future', 'Games', 'Gandhi', 'Homer', 'Horror', 'Hugo', 'Ibsen', 'Journey', 'Kafka', 'King', 'Lahiri', 'Larsson', 'Learn', 'Literary Fiction', 'Make', 'Manage', 'Marquez', 'Money', 'Mystery', 'Negotiate', 'Painting', 'Philosophy', 'Photography', 'Poetry', 'Production', 'Programming', 'React', 'Redux', 'River', 'Robotics', 'Rowling', 'Satire', 'Science Fiction', 'Shakespeare', 'Singh', 'Swimming', 'Tale', 'Thrun', 'Time', 'Tolstoy', 'Travel', 'Ultimate', 'Virtual Reality', 'Web Development', 'iOS'
+]
+
+#
+### Resources
+
+* [Create React App](https://github.com/facebookincubator/create-react-app)
+* [Udacity's HTML Style Guide](http://udacity.github.io/frontend-nanodegree-styleguide/index.html)
+* [Udacity's CSS Style Guide](http://udacity.github.io/frontend-nanodegree-styleguide/css.html)
+* [Udacity's JavaScript Style Guide](http://udacity.github.io/frontend-nanodegree-styleguide/javascript.html)
+* [Udacity's Git Style Guide](https://udacity.github.io/git-styleguide/)
+* [RaterFox](https://www.raterfox.com)
+* [Semantic UI](https://semantic-ui.com)
+* [React Semantic UI](https://react.semantic-ui.com/)
